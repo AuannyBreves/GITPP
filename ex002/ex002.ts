@@ -1,71 +1,80 @@
 class Alimento{
     nome: string;
     sabor: string;
-    cor: string;
-    consumido: boolean = false;
+    calorias: number;
 
-    constructor(nome: string, sabor: string, cor: string) {
-        this.nome = nome;
-        this.sabor = sabor;
-        this.cor = cor;
+    constructor(name: string, flavor: string, kcal: number){
+        this.nome = name;
+        this.sabor = flavor;
+        this.calorias = kcal;
     }
 
-    comerAgora(){
-        let res = (this.consumido) ? ' já foi consumido antes.' : ' foi consumido agora.';
-        console.log('O alimento ' + this.nome + res);
-        this.consumido = true;
+    kcalConsumidas(qtd: number){
+        console.log("Em %i %s foram consumidas %i kcal.", qtd, this.nome, this.calorias * qtd);
+        console.log('');
     }
-
 }
 
-class Jogo{
+class Animal{
+    nomePopular: string;
+    nomeCientifico: string;
+    habitat: string;
+    reino: string;
+
+    constructor(pop: string, cien: string, hab: string){
+        this.nomePopular = pop;
+        this.nomeCientifico = cien;
+        this.habitat = hab;
+        this.reino = 'animalia';
+    }
+
+    ondeVive(){
+        console.log('O habitat do animal %s (%s) é o(a) %s.', this.nomePopular, this.nomeCientifico, this.habitat);
+        if (this.habitat == 'savana'){
+            console.log('A savana é um bioma categorizado por uma região plana cuja a vegetação predominante são as plantas gramíneas.')
+        } else if (this.habitat == 'selva'){
+            console.log('A selva é um bioma florestal categorizado por vegetação densa e grande biodiversidade.')
+        } else{
+            console.log('Infelizmente, não temos mais informações sobre esse bioma.')
+        }
+        console.log('');
+    }
+}
+
+class Pessoa{
     nome: string;
-    jogadores: number;
-    genero: string;
+    altura: number;
+    peso: number;
 
-    constructor(nome: string, jogadores: number, genero: string) {
-        this.nome = nome;
-        this.jogadores = jogadores;
-        this.genero = genero;
+    constructor(name: string, height: number, weight: number){
+        this.nome = name;
+        this.altura = height;
+        this.peso = weight;
     }
 
-    iniciarJogo(){
-        console.log("O jogo escolhido foi " + this.nome + ". Vamos nos divertir!")
+    imc(){
+        let imc = this.peso / (this.altura * this.altura);
+        if (imc < 18.5){
+            console.log('Condição Atual: Abaixo do Peso.');
+        } else if (imc < 25){
+            console.log('Condição Atual: Peso Normal.');
+        } else if (imc < 30){
+            console.log('Condição Atual: Sobrepeso.');
+        } else if (imc < 35){
+            console.log('Condição Atual: Obesidade Grau I.');
+        } else if (imc < 40){
+            console.log('Condição Atual: Obesidade Grau II.');
+        } else{
+            console.log('Condição Atual: Obesidade Grau III.');
+        }
     }
 }
 
-class Roupa{
-    material: string;
-    valorPago: number;
-    conforto: boolean;
+var alimento_1 = new Alimento('batata(s) frita(s)', 'salgado', 312);
+alimento_1.kcalConsumidas(4);
 
-    constructor(material: string, valorPago: number, conforto: boolean) {
-        this.material = material;
-        this.valorPago = valorPago;
-        this.conforto = conforto;
-    }
+var animal_1 = new Animal('elefante-africano', 'Loxodonta', 'savana');
+animal_1.ondeVive();
 
-    opiniaoCliente(){
-        let caro = (this.valorPago >= 300) ? ' é caro ' : ' não é caro ';
-        let confortavel = (this.conforto == true) ? ' é confortável.' : ' não é confortável.';
-        console.log('Esse produto' + caro + 'e' + confortavel);
-    }
-
-}
-
-var a1 = new Alimento('limão','azedo', 'verde');
-var a2 = new Alimento('banana','doce', 'amarelo')
-
-var j1 = new Jogo('BF4', 1, 'Tiro');
-var j2 = new Jogo('Mario', 2, 'Plataforma')
-
-var r1 = new Roupa('Algodão', 150, true);
-var r2 = new Roupa('Poliester', 70, false);
-
-a1.comerAgora()
-a1.comerAgora()
-a2.comerAgora()
-j1.iniciarJogo()
-j2.iniciarJogo()
-r1.opiniaoCliente()
-r2.opiniaoCliente()
+var pessoa_1 = new Pessoa('Maria', 1.58, 58);
+pessoa_1.imc();
